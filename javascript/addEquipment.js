@@ -1,0 +1,3 @@
+let apiEquipmentApi = new TempApi.EquipmentApi();import TempApi from '../src/index';let equipment = new TempApi.Equipment();document.getElementById('idkix').onclick = (event) => {
+    event.preventDefault();
+    equipment['eqName'] = document.querySelector("[annotationname = 'eqName']").value;equipment['eqType'] = document.querySelector("[annotationname = 'eqType']").value;equipment['eqCost'] = document.querySelector("[annotationname = 'eqCost']").value;equipment['eqFix'] = document.querySelector("[annotationname = 'eqFix']").value;apiEquipmentApi.createequipment( equipment, (error, data, response) => { if (error) {console.error(error);} else { console.log('API called successfully. Returned data: ' + data); {   location.href= '/Page2' ;}}});};window.onload = () => {};

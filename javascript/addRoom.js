@@ -1,0 +1,3 @@
+let apiRoomApi = new TempApi.RoomApi();import TempApi from '../src/index';let room = new TempApi.Room();document.getElementById('idkix').onclick = (event) => {
+    event.preventDefault();
+    room['rName'] = document.querySelector("[annotationname = 'rName']").value;room['rFloor'] = document.querySelector("[annotationname = 'rFloor']").value;room['rAisle'] = document.querySelector("[annotationname = 'rAisle']").value;room['rEmpty'] = document.querySelector("[annotationname = 'rEmpty']").value;apiRoomApi.createroom( room, (error, data, response) => { if (error) {console.error(error);} else { console.log('API called successfully. Returned data: ' + data); {   location.href= '/Page2' ;}}});};window.onload = () => {};
