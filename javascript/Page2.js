@@ -637,25 +637,7 @@ let apiDoctorApi = new TempApi.DoctorApi();import TempApi from '../src/index';le
       
     });
 
-    
-    // Retrieve current data from local storage
-    const storedData = window.localStorage.getItem("data");
-    const currentData = storedData
-        ? new Map(JSON.parse(storedData))
-        : new Map();
-
-    // Add new data to current data
-    const newData = Array.from(map.entries());
-    newData.forEach(([key, value]) => {
-        currentData.set(key, value);
-    });
-
-    // Save updated data to local storage
-    window.localStorage.setItem(
-        "data",
-        JSON.stringify(Array.from(currentData.entries()))
-    );
-    
+    window.localStorage.setItem('data', JSON.stringify(Array.from(map.entries())));
     
     [...subDataElements].forEach((element,index) => {if(index >= data.length) subDataElements[index].style.display = 'none';})}});apiRoomApi.getAllroom((error, data, response) => { if (error) {console.error(error);} else { console.log('API called successfully. Returned data: ' + data); const subDataElements =[...document.getElementById("iw4x6o").querySelectorAll( "[dataitem='true']" )].filter(
     (element, index, array) =>
@@ -710,25 +692,7 @@ let apiDoctorApi = new TempApi.DoctorApi();import TempApi from '../src/index';le
       
     });
 
-    
-    // Retrieve current data from local storage
-    const storedData = window.localStorage.getItem("data");
-    const currentData = storedData
-        ? new Map(JSON.parse(storedData))
-        : new Map();
-
-    // Add new data to current data
-    const newData = Array.from(map.entries());
-    newData.forEach(([key, value]) => {
-        currentData.set(key, value);
-    });
-
-    // Save updated data to local storage
-    window.localStorage.setItem(
-        "data",
-        JSON.stringify(Array.from(currentData.entries()))
-    );
-    
+    window.localStorage.setItem('data', JSON.stringify(Array.from(map.entries())));
     
     [...subDataElements].forEach((element,index) => {if(index >= data.length) subDataElements[index].style.display = 'none';})}});apiEquipmentApi.getAllequipment((error, data, response) => { if (error) {console.error(error);} else { console.log('API called successfully. Returned data: ' + data); const subDataElements =[...document.getElementById("itz4rs").querySelectorAll( "[dataitem='true']" )].filter(
     (element, index, array) =>
@@ -783,24 +747,6 @@ let apiDoctorApi = new TempApi.DoctorApi();import TempApi from '../src/index';le
       
     });
 
-    
-    // Retrieve current data from local storage
-    const storedData = window.localStorage.getItem("data");
-    const currentData = storedData
-        ? new Map(JSON.parse(storedData))
-        : new Map();
-
-    // Add new data to current data
-    const newData = Array.from(map.entries());
-    newData.forEach(([key, value]) => {
-        currentData.set(key, value);
-    });
-
-    // Save updated data to local storage
-    window.localStorage.setItem(
-        "data",
-        JSON.stringify(Array.from(currentData.entries()))
-    );
-    
+    window.localStorage.setItem('data', JSON.stringify(Array.from(map.entries())));
     
     [...subDataElements].forEach((element,index) => {if(index >= data.length) subDataElements[index].style.display = 'none';})}});};
