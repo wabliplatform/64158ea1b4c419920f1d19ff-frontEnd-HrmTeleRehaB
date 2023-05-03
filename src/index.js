@@ -15,11 +15,9 @@
 import ApiClient from './ApiClient';
 import Doctor from './model/Doctor';
 import Equipment from './model/Equipment';
-import P from './model/P';
 import Room from './model/Room';
 import DoctorApi from './api/DoctorApi';
 import EquipmentApi from './api/EquipmentApi';
-import PApi from './api/PApi';
 import RoomApi from './api/RoomApi';
 
 
@@ -74,12 +72,6 @@ export {
     Equipment,
 
     /**
-     * The P model constructor.
-     * @property {module:model/P}
-     */
-    P,
-
-    /**
      * The Room model constructor.
      * @property {module:model/Room}
      */
@@ -96,12 +88,6 @@ export {
     * @property {module:api/EquipmentApi}
     */
     EquipmentApi,
-
-    /**
-    * The PApi service constructor.
-    * @property {module:api/PApi}
-    */
-    PApi,
 
     /**
     * The RoomApi service constructor.
@@ -130,12 +116,6 @@ export default {
     Equipment,
 
     /**
-     * The P model constructor.
-     * @property {module:model/P}
-     */
-    P,
-
-    /**
      * The Room model constructor.
      * @property {module:model/Room}
      */
@@ -152,12 +132,6 @@ export default {
     * @property {module:api/EquipmentApi}
     */
     EquipmentApi,
-
-    /**
-    * The PApi service constructor.
-    * @property {module:api/PApi}
-    */
-    PApi,
 
     /**
     * The RoomApi service constructor.

@@ -1,6 +1,154 @@
 let apiDoctorApi = new TempApi.DoctorApi();import TempApi from '../src/index';let apiRoomApi = new TempApi.RoomApi();let apiEquipmentApi = new TempApi.EquipmentApi();document.getElementById('irx98z').onclick = (event) => {
     event.preventDefault();
-    {   location.href= '/AddDoctor' ;}};document.getElementById('is9up').onclick = (event) => {
+    {   location.href= '/AddDoctor' ;}};const onClickPaginationButtoni5hn7 = (chunk, pagination) => {
+    for (let i = 0; i < pagination.children.length; i++) {
+      if (
+        pagination.children[i].classList.value.includes("active") === true
+      ) {
+        pagination.children[i].classList.remove("active");
+      }
+    }
+
+    let numberOfFrontButtons =  findTypeOfPaginationi5hn7(pagination);
+    pagination.children[chunk+numberOfFrontButtons-1].classList.add("active");
+
+  apiDoctorApi.getAlldoctor((error, data, response) => { if (error) {console.error(error);} else { console.log('API called successfully. Returned data: ' + data); const subDataElements =[...document.getElementById("i5hn7").querySelectorAll( "[dataitem='true']" )].filter(
+    (element, index, array) =>
+    !array.reduce((hasAncestorFlag, dataItem) => hasAncestorFlag || (element.compareDocumentPosition(dataItem) & Node.DOCUMENT_POSITION_CONTAINS) === 8, false)
+  );const map = new Map();[...subDataElements].forEach((element, index) => {
+        if (index >= data.length - (chunk-1)*subDataElements.length) {
+            subDataElements[index].style.display = 'none';
+        }
+        else {
+            subDataElements[index].style.display = "";
+        }
+      });data.forEach((item, i) => {
+
+        let revertIndex = data.length - i -1;
+
+        if(data.length - chunk*subDataElements.length <= revertIndex && revertIndex < data.length - (chunk-1)*subDataElements.length){
+            try { 
+      const insideSubDataElement = subDataElements[i-(chunk-1) *subDataElements.length].querySelector("[annotationname = 'dName']");
+      if(insideSubDataElement !== null){
+        insideSubDataElement.textContent = data[data.length -i -1].dName;
+        
+      }
+      else if(subDataElements[i-(chunk-1) *subDataElements.length].getAttribute('annotationname') === 'dName'){
+        subDataElements[i-(chunk-1) *subDataElements.length].textContent = data[data.length -i -1].dName;
+        
+      }
+     } catch (e) { console.log(e) };try { 
+      const insideSubDataElement = subDataElements[i-(chunk-1) *subDataElements.length].querySelector("[annotationname = 'dGender']");
+      if(insideSubDataElement !== null){
+        insideSubDataElement.textContent = data[data.length -i -1].dGender;
+        
+      }
+      else if(subDataElements[i-(chunk-1) *subDataElements.length].getAttribute('annotationname') === 'dGender'){
+        subDataElements[i-(chunk-1) *subDataElements.length].textContent = data[data.length -i -1].dGender;
+        
+      }
+     } catch (e) { console.log(e) };try { 
+      const insideSubDataElement = subDataElements[i-(chunk-1) *subDataElements.length].querySelector("[annotationname = 'dSpecial']");
+      if(insideSubDataElement !== null){
+        insideSubDataElement.textContent = data[data.length -i -1].dSpecial;
+        
+      }
+      else if(subDataElements[i-(chunk-1) *subDataElements.length].getAttribute('annotationname') === 'dSpecial'){
+        subDataElements[i-(chunk-1) *subDataElements.length].textContent = data[data.length -i -1].dSpecial;
+        
+      }
+     } catch (e) { console.log(e) };try { 
+      const insideSubDataElement = subDataElements[i-(chunk-1) *subDataElements.length].querySelector("[annotationname = 'dAge']");
+      if(insideSubDataElement !== null){
+        insideSubDataElement.textContent = data[data.length -i -1].dAge;
+        
+      }
+      else if(subDataElements[i-(chunk-1) *subDataElements.length].getAttribute('annotationname') === 'dAge'){
+        subDataElements[i-(chunk-1) *subDataElements.length].textContent = data[data.length -i -1].dAge;
+        
+      }
+     } catch (e) { console.log(e) };try { 
+      const insideSubDataElement = subDataElements[i-(chunk-1) *subDataElements.length].querySelector("[annotationname = 'dLeave']");
+      if(insideSubDataElement !== null){
+        insideSubDataElement.textContent = data[data.length -i -1].dLeave;
+        
+      }
+      else if(subDataElements[i-(chunk-1) *subDataElements.length].getAttribute('annotationname') === 'dLeave'){
+        subDataElements[i-(chunk-1) *subDataElements.length].textContent = data[data.length -i -1].dLeave;
+        
+      }
+     } catch (e) { console.log(e) };
+            map.set(subDataElements[i-(chunk-1) * subDataElements.length].getAttribute('id'), data[data.length-i-1])
+        }
+        
+    // Retrieve current data from local storage
+    const storedData = window.localStorage.getItem("data");
+    const currentData = storedData
+        ? new Map(JSON.parse(storedData))
+        : new Map();
+
+    // Add new data to current data
+    const newData = Array.from(map.entries());
+    newData.forEach(([key, value]) => {
+        currentData.set(key, value);
+    });
+
+    // Save updated data to local storage
+    window.localStorage.setItem(
+        "data",
+        JSON.stringify(Array.from(currentData.entries()))
+    );
+    
+    })
+    }});}
+
+    const findTypeOfPaginationi5hn7 = (pagination) => {
+
+      let firstChild = pagination.children[0];
+      let secondChild = pagination.children[1];
+
+      if (
+        (firstChild.attributes.getNamedItem("pagination-first") !== null ||
+          firstChild.attributes.getNamedItem("pagination-previous") !== null) &&
+        (secondChild.attributes.getNamedItem("pagination-first") !== null ||
+          secondChild.attributes.getNamedItem("pagination-previous") !== null)
+      ) {
+        return 2;
+      } else if  (
+        (firstChild.attributes.getNamedItem("pagination-first") !== null ||
+          firstChild.attributes.getNamedItem("pagination-previous") !== null) ||
+        (secondChild.attributes.getNamedItem("pagination-first") !== null ||
+          secondChild.attributes.getNamedItem("pagination-previous") !== null)
+      ) {
+        return 1;
+      }
+      else{
+        return 0;
+      }
+
+    }
+  
+
+    const returnChunkIndexi5hn7 = (chunk, numberOfPages, cause) => {
+
+      if(cause === '+'){
+        if(chunk < numberOfPages){
+          return chunk + 1;
+        }
+        else{
+          return chunk;
+        }
+      }
+      else if(cause === '-'){
+        if(chunk > 2){
+          return chunk - 1;
+        }
+        else{
+          return 1;
+        }
+      }
+    }
+  document.getElementById('is9up').onclick = (event) => {
     event.preventDefault();
     {  
       let transitionId = window.location.href.split('/').at(-1);
@@ -209,7 +357,145 @@ let apiDoctorApi = new TempApi.DoctorApi();import TempApi from '../src/index';le
       }
     apiDoctorApi.deletedoctor( doctorId, (error, data, response) => { if (error) {console.error(error);} else { console.log('API called successfully.');{   location.href= '/Page2' ;}}});};document.getElementById('io2z9z').onclick = (event) => {
     event.preventDefault();
-    {   location.href= '/addRoom' ;}};document.getElementById('itg77g').onclick = (event) => {
+    {   location.href= '/addRoom' ;}};const onClickPaginationButtoniw4x6o = (chunk, pagination) => {
+    for (let i = 0; i < pagination.children.length; i++) {
+      if (
+        pagination.children[i].classList.value.includes("active") === true
+      ) {
+        pagination.children[i].classList.remove("active");
+      }
+    }
+
+    let numberOfFrontButtons =  findTypeOfPaginationiw4x6o(pagination);
+    pagination.children[chunk+numberOfFrontButtons-1].classList.add("active");
+
+  apiRoomApi.getAllroom((error, data, response) => { if (error) {console.error(error);} else { console.log('API called successfully. Returned data: ' + data); const subDataElements =[...document.getElementById("iw4x6o").querySelectorAll( "[dataitem='true']" )].filter(
+    (element, index, array) =>
+    !array.reduce((hasAncestorFlag, dataItem) => hasAncestorFlag || (element.compareDocumentPosition(dataItem) & Node.DOCUMENT_POSITION_CONTAINS) === 8, false)
+  );const map = new Map();[...subDataElements].forEach((element, index) => {
+        if (index >= data.length - (chunk-1)*subDataElements.length) {
+            subDataElements[index].style.display = 'none';
+        }
+        else {
+            subDataElements[index].style.display = "";
+        }
+      });data.forEach((item, i) => {
+
+        let revertIndex = data.length - i -1;
+
+        if(data.length - chunk*subDataElements.length <= revertIndex && revertIndex < data.length - (chunk-1)*subDataElements.length){
+            try { 
+      const insideSubDataElement = subDataElements[i-(chunk-1) *subDataElements.length].querySelector("[annotationname = 'rName']");
+      if(insideSubDataElement !== null){
+        insideSubDataElement.textContent = data[data.length -i -1].rName;
+        
+      }
+      else if(subDataElements[i-(chunk-1) *subDataElements.length].getAttribute('annotationname') === 'rName'){
+        subDataElements[i-(chunk-1) *subDataElements.length].textContent = data[data.length -i -1].rName;
+        
+      }
+     } catch (e) { console.log(e) };try { 
+      const insideSubDataElement = subDataElements[i-(chunk-1) *subDataElements.length].querySelector("[annotationname = 'rFloor']");
+      if(insideSubDataElement !== null){
+        insideSubDataElement.textContent = data[data.length -i -1].rFloor;
+        
+      }
+      else if(subDataElements[i-(chunk-1) *subDataElements.length].getAttribute('annotationname') === 'rFloor'){
+        subDataElements[i-(chunk-1) *subDataElements.length].textContent = data[data.length -i -1].rFloor;
+        
+      }
+     } catch (e) { console.log(e) };try { 
+      const insideSubDataElement = subDataElements[i-(chunk-1) *subDataElements.length].querySelector("[annotationname = 'rAisle']");
+      if(insideSubDataElement !== null){
+        insideSubDataElement.textContent = data[data.length -i -1].rAisle;
+        
+      }
+      else if(subDataElements[i-(chunk-1) *subDataElements.length].getAttribute('annotationname') === 'rAisle'){
+        subDataElements[i-(chunk-1) *subDataElements.length].textContent = data[data.length -i -1].rAisle;
+        
+      }
+     } catch (e) { console.log(e) };try { 
+      const insideSubDataElement = subDataElements[i-(chunk-1) *subDataElements.length].querySelector("[annotationname = 'rEmpty']");
+      if(insideSubDataElement !== null){
+        insideSubDataElement.textContent = data[data.length -i -1].rEmpty;
+        
+      }
+      else if(subDataElements[i-(chunk-1) *subDataElements.length].getAttribute('annotationname') === 'rEmpty'){
+        subDataElements[i-(chunk-1) *subDataElements.length].textContent = data[data.length -i -1].rEmpty;
+        
+      }
+     } catch (e) { console.log(e) };
+            map.set(subDataElements[i-(chunk-1) * subDataElements.length].getAttribute('id'), data[data.length-i-1])
+        }
+        
+    // Retrieve current data from local storage
+    const storedData = window.localStorage.getItem("data");
+    const currentData = storedData
+        ? new Map(JSON.parse(storedData))
+        : new Map();
+
+    // Add new data to current data
+    const newData = Array.from(map.entries());
+    newData.forEach(([key, value]) => {
+        currentData.set(key, value);
+    });
+
+    // Save updated data to local storage
+    window.localStorage.setItem(
+        "data",
+        JSON.stringify(Array.from(currentData.entries()))
+    );
+    
+    })
+    }});}
+
+    const findTypeOfPaginationiw4x6o = (pagination) => {
+
+      let firstChild = pagination.children[0];
+      let secondChild = pagination.children[1];
+
+      if (
+        (firstChild.attributes.getNamedItem("pagination-first") !== null ||
+          firstChild.attributes.getNamedItem("pagination-previous") !== null) &&
+        (secondChild.attributes.getNamedItem("pagination-first") !== null ||
+          secondChild.attributes.getNamedItem("pagination-previous") !== null)
+      ) {
+        return 2;
+      } else if  (
+        (firstChild.attributes.getNamedItem("pagination-first") !== null ||
+          firstChild.attributes.getNamedItem("pagination-previous") !== null) ||
+        (secondChild.attributes.getNamedItem("pagination-first") !== null ||
+          secondChild.attributes.getNamedItem("pagination-previous") !== null)
+      ) {
+        return 1;
+      }
+      else{
+        return 0;
+      }
+
+    }
+  
+
+    const returnChunkIndexiw4x6o = (chunk, numberOfPages, cause) => {
+
+      if(cause === '+'){
+        if(chunk < numberOfPages){
+          return chunk + 1;
+        }
+        else{
+          return chunk;
+        }
+      }
+      else if(cause === '-'){
+        if(chunk > 2){
+          return chunk - 1;
+        }
+        else{
+          return 1;
+        }
+      }
+    }
+  document.getElementById('itg77g').onclick = (event) => {
     event.preventDefault();
     {  
       let transitionId = window.location.href.split('/').at(-1);
@@ -577,57 +863,57 @@ let apiDoctorApi = new TempApi.DoctorApi();import TempApi from '../src/index';le
     apiEquipmentApi.deleteequipment( equipmentId, (error, data, response) => { if (error) {console.error(error);} else { console.log('API called successfully.');{   location.href= '/Page2' ;}}});};window.onload = () => {apiDoctorApi.getAlldoctor((error, data, response) => { if (error) {console.error(error);} else { console.log('API called successfully. Returned data: ' + data); const subDataElements =[...document.getElementById("i5hn7").querySelectorAll( "[dataitem='true']" )].filter(
     (element, index, array) =>
     !array.reduce((hasAncestorFlag, dataItem) => hasAncestorFlag || (element.compareDocumentPosition(dataItem) & Node.DOCUMENT_POSITION_CONTAINS) === 8, false)
-  );const map = new Map();  data.forEach((item,i) => {
+  );const map = new Map();let chunk = 1;  data.forEach((item,i) => {
     if(subDataElements.length > i)
       {
         try { 
-      const insideSubDataElement = subDataElements[i].querySelector("[annotationname = 'dName']");
+      const insideSubDataElement = subDataElements[i-(chunk-1) *subDataElements.length].querySelector("[annotationname = 'dName']");
       if(insideSubDataElement !== null){
         insideSubDataElement.textContent = data[data.length -i -1].dName;
         
       }
-      else if(subDataElements[i].getAttribute('annotationname') === 'dName'){
-        subDataElements[i].textContent = data[data.length -i -1].dName;
+      else if(subDataElements[i-(chunk-1) *subDataElements.length].getAttribute('annotationname') === 'dName'){
+        subDataElements[i-(chunk-1) *subDataElements.length].textContent = data[data.length -i -1].dName;
         
       }
      } catch (e) { console.log(e) };try { 
-      const insideSubDataElement = subDataElements[i].querySelector("[annotationname = 'dGender']");
+      const insideSubDataElement = subDataElements[i-(chunk-1) *subDataElements.length].querySelector("[annotationname = 'dGender']");
       if(insideSubDataElement !== null){
         insideSubDataElement.textContent = data[data.length -i -1].dGender;
         
       }
-      else if(subDataElements[i].getAttribute('annotationname') === 'dGender'){
-        subDataElements[i].textContent = data[data.length -i -1].dGender;
+      else if(subDataElements[i-(chunk-1) *subDataElements.length].getAttribute('annotationname') === 'dGender'){
+        subDataElements[i-(chunk-1) *subDataElements.length].textContent = data[data.length -i -1].dGender;
         
       }
      } catch (e) { console.log(e) };try { 
-      const insideSubDataElement = subDataElements[i].querySelector("[annotationname = 'dSpecial']");
+      const insideSubDataElement = subDataElements[i-(chunk-1) *subDataElements.length].querySelector("[annotationname = 'dSpecial']");
       if(insideSubDataElement !== null){
         insideSubDataElement.textContent = data[data.length -i -1].dSpecial;
         
       }
-      else if(subDataElements[i].getAttribute('annotationname') === 'dSpecial'){
-        subDataElements[i].textContent = data[data.length -i -1].dSpecial;
+      else if(subDataElements[i-(chunk-1) *subDataElements.length].getAttribute('annotationname') === 'dSpecial'){
+        subDataElements[i-(chunk-1) *subDataElements.length].textContent = data[data.length -i -1].dSpecial;
         
       }
      } catch (e) { console.log(e) };try { 
-      const insideSubDataElement = subDataElements[i].querySelector("[annotationname = 'dAge']");
+      const insideSubDataElement = subDataElements[i-(chunk-1) *subDataElements.length].querySelector("[annotationname = 'dAge']");
       if(insideSubDataElement !== null){
         insideSubDataElement.textContent = data[data.length -i -1].dAge;
         
       }
-      else if(subDataElements[i].getAttribute('annotationname') === 'dAge'){
-        subDataElements[i].textContent = data[data.length -i -1].dAge;
+      else if(subDataElements[i-(chunk-1) *subDataElements.length].getAttribute('annotationname') === 'dAge'){
+        subDataElements[i-(chunk-1) *subDataElements.length].textContent = data[data.length -i -1].dAge;
         
       }
      } catch (e) { console.log(e) };try { 
-      const insideSubDataElement = subDataElements[i].querySelector("[annotationname = 'dLeave']");
+      const insideSubDataElement = subDataElements[i-(chunk-1) *subDataElements.length].querySelector("[annotationname = 'dLeave']");
       if(insideSubDataElement !== null){
         insideSubDataElement.textContent = data[data.length -i -1].dLeave;
         
       }
-      else if(subDataElements[i].getAttribute('annotationname') === 'dLeave'){
-        subDataElements[i].textContent = data[data.length -i -1].dLeave;
+      else if(subDataElements[i-(chunk-1) *subDataElements.length].getAttribute('annotationname') === 'dLeave'){
+        subDataElements[i-(chunk-1) *subDataElements.length].textContent = data[data.length -i -1].dLeave;
         
       }
      } catch (e) { console.log(e) };
@@ -657,50 +943,137 @@ let apiDoctorApi = new TempApi.DoctorApi();import TempApi from '../src/index';le
     );
     
     
+  let numberOfPages = Math.ceil(data.length/subDataElements.length);
+  let pagination = document.getElementById("i5hn7").querySelector('[pagination-list="true"]');
+
+    let paginationAttributes = [
+      "pagination-first",
+      "pagination-last",
+      "pagination-previous",
+      "pagination-next",
+    ];
+
+    for (let i = 0; i < pagination.children.length; ) {
+      let foundAttr = false;
+
+      paginationAttributes.forEach((attr) => {
+        if (pagination.children[i].attributes.getNamedItem(attr) !== null) {
+          foundAttr = true;
+        }
+      });
+      if (foundAttr === false) {
+        pagination.removeChild(pagination.children[i]);
+      } else {
+        i++;
+      }
+    }
+
+    for (let i = 0; i < numberOfPages; i++) {
+      let child = document.createElement("li");
+      child.classList.add("page-item");
+      if (i === numberOfPages - 1) {
+        child.classList.add("active");
+      }
+      let insideChild = document.createElement("a");
+      insideChild.classList.add("page-link");
+      let textnode = document.createTextNode(numberOfPages - i);
+      insideChild.appendChild(textnode);
+      insideChild.setAttribute("href", "#!");
+      child.appendChild(insideChild);
+      child.onclick = function () {
+        if (chunk !== numberOfPages - i) {
+          chunk = numberOfPages - i;
+          onClickPaginationButtoni5hn7(chunk, pagination);
+        }
+      };
+
+      let numberOfFrontButtons =  findTypeOfPaginationi5hn7(pagination);
+      pagination.insertBefore(child, pagination.children[numberOfFrontButtons]);
+
+    }
+
+    for (let i = 0; i < pagination.children.length; i++) {
+      let child = pagination.children[i];
+      if ( child.getAttribute("pagination-first") === "true" && numberOfPages > 0 ) {
+        child.onclick = function () {
+          if(chunk !== 1){
+            chunk = 1;
+            onClickPaginationButtoni5hn7(1, pagination);
+          }
+        };
+      }
+
+      if ( child.getAttribute( "pagination-last" ) === "true" && numberOfPages > 0 ) {
+        child.onclick = function () {
+          if(chunk !== numberOfPages){
+            chunk = numberOfPages;
+            onClickPaginationButtoni5hn7( numberOfPages, pagination);
+          }
+        };
+      }
+
+      if ( child.getAttribute("pagination-previous") === "true" && numberOfPages > 0 ) {
+        child.onclick = function () {
+          if(chunk !== returnChunkIndexi5hn7(chunk,numberOfPages,'-')){
+            chunk = returnChunkIndexi5hn7(chunk,numberOfPages,'-');
+            onClickPaginationButtoni5hn7(chunk, pagination);
+          }
+        };
+      }
+
+      if ( child.getAttribute("pagination-next") === "true" && numberOfPages > 0) {
+        child.onclick = function () {
+          if(chunk !== returnChunkIndexi5hn7(chunk,numberOfPages,'+')){
+            chunk = returnChunkIndexi5hn7(chunk,numberOfPages,'+');
+            onClickPaginationButtoni5hn7(chunk, pagination);
+          }
+        };
+      }
+    };
     [...subDataElements].forEach((element,index) => {if(index >= data.length) subDataElements[index].style.display = 'none';})}});apiRoomApi.getAllroom((error, data, response) => { if (error) {console.error(error);} else { console.log('API called successfully. Returned data: ' + data); const subDataElements =[...document.getElementById("iw4x6o").querySelectorAll( "[dataitem='true']" )].filter(
     (element, index, array) =>
     !array.reduce((hasAncestorFlag, dataItem) => hasAncestorFlag || (element.compareDocumentPosition(dataItem) & Node.DOCUMENT_POSITION_CONTAINS) === 8, false)
-  );const map = new Map();  data.forEach((item,i) => {
+  );const map = new Map();let chunk = 1;  data.forEach((item,i) => {
     if(subDataElements.length > i)
       {
         try { 
-      const insideSubDataElement = subDataElements[i].querySelector("[annotationname = 'rName']");
+      const insideSubDataElement = subDataElements[i-(chunk-1) *subDataElements.length].querySelector("[annotationname = 'rName']");
       if(insideSubDataElement !== null){
         insideSubDataElement.textContent = data[data.length -i -1].rName;
         
       }
-      else if(subDataElements[i].getAttribute('annotationname') === 'rName'){
-        subDataElements[i].textContent = data[data.length -i -1].rName;
+      else if(subDataElements[i-(chunk-1) *subDataElements.length].getAttribute('annotationname') === 'rName'){
+        subDataElements[i-(chunk-1) *subDataElements.length].textContent = data[data.length -i -1].rName;
         
       }
      } catch (e) { console.log(e) };try { 
-      const insideSubDataElement = subDataElements[i].querySelector("[annotationname = 'rFloor']");
+      const insideSubDataElement = subDataElements[i-(chunk-1) *subDataElements.length].querySelector("[annotationname = 'rFloor']");
       if(insideSubDataElement !== null){
         insideSubDataElement.textContent = data[data.length -i -1].rFloor;
         
       }
-      else if(subDataElements[i].getAttribute('annotationname') === 'rFloor'){
-        subDataElements[i].textContent = data[data.length -i -1].rFloor;
+      else if(subDataElements[i-(chunk-1) *subDataElements.length].getAttribute('annotationname') === 'rFloor'){
+        subDataElements[i-(chunk-1) *subDataElements.length].textContent = data[data.length -i -1].rFloor;
         
       }
      } catch (e) { console.log(e) };try { 
-      const insideSubDataElement = subDataElements[i].querySelector("[annotationname = 'rAisle']");
+      const insideSubDataElement = subDataElements[i-(chunk-1) *subDataElements.length].querySelector("[annotationname = 'rAisle']");
       if(insideSubDataElement !== null){
         insideSubDataElement.textContent = data[data.length -i -1].rAisle;
         
       }
-      else if(subDataElements[i].getAttribute('annotationname') === 'rAisle'){
-        subDataElements[i].textContent = data[data.length -i -1].rAisle;
+      else if(subDataElements[i-(chunk-1) *subDataElements.length].getAttribute('annotationname') === 'rAisle'){
+        subDataElements[i-(chunk-1) *subDataElements.length].textContent = data[data.length -i -1].rAisle;
         
       }
      } catch (e) { console.log(e) };try { 
-      const insideSubDataElement = subDataElements[i].querySelector("[annotationname = 'rEmpty']");
+      const insideSubDataElement = subDataElements[i-(chunk-1) *subDataElements.length].querySelector("[annotationname = 'rEmpty']");
       if(insideSubDataElement !== null){
         insideSubDataElement.textContent = data[data.length -i -1].rEmpty;
         
       }
-      else if(subDataElements[i].getAttribute('annotationname') === 'rEmpty'){
-        subDataElements[i].textContent = data[data.length -i -1].rEmpty;
+      else if(subDataElements[i-(chunk-1) *subDataElements.length].getAttribute('annotationname') === 'rEmpty'){
+        subDataElements[i-(chunk-1) *subDataElements.length].textContent = data[data.length -i -1].rEmpty;
         
       }
      } catch (e) { console.log(e) };
@@ -730,6 +1103,93 @@ let apiDoctorApi = new TempApi.DoctorApi();import TempApi from '../src/index';le
     );
     
     
+  let numberOfPages = Math.ceil(data.length/subDataElements.length);
+  let pagination = document.getElementById("iw4x6o").querySelector('[pagination-list="true"]');
+
+    let paginationAttributes = [
+      "pagination-first",
+      "pagination-last",
+      "pagination-previous",
+      "pagination-next",
+    ];
+
+    for (let i = 0; i < pagination.children.length; ) {
+      let foundAttr = false;
+
+      paginationAttributes.forEach((attr) => {
+        if (pagination.children[i].attributes.getNamedItem(attr) !== null) {
+          foundAttr = true;
+        }
+      });
+      if (foundAttr === false) {
+        pagination.removeChild(pagination.children[i]);
+      } else {
+        i++;
+      }
+    }
+
+    for (let i = 0; i < numberOfPages; i++) {
+      let child = document.createElement("li");
+      child.classList.add("page-item");
+      if (i === numberOfPages - 1) {
+        child.classList.add("active");
+      }
+      let insideChild = document.createElement("a");
+      insideChild.classList.add("page-link");
+      let textnode = document.createTextNode(numberOfPages - i);
+      insideChild.appendChild(textnode);
+      insideChild.setAttribute("href", "#!");
+      child.appendChild(insideChild);
+      child.onclick = function () {
+        if (chunk !== numberOfPages - i) {
+          chunk = numberOfPages - i;
+          onClickPaginationButtoniw4x6o(chunk, pagination);
+        }
+      };
+
+      let numberOfFrontButtons =  findTypeOfPaginationiw4x6o(pagination);
+      pagination.insertBefore(child, pagination.children[numberOfFrontButtons]);
+
+    }
+
+    for (let i = 0; i < pagination.children.length; i++) {
+      let child = pagination.children[i];
+      if ( child.getAttribute("pagination-first") === "true" && numberOfPages > 0 ) {
+        child.onclick = function () {
+          if(chunk !== 1){
+            chunk = 1;
+            onClickPaginationButtoniw4x6o(1, pagination);
+          }
+        };
+      }
+
+      if ( child.getAttribute( "pagination-last" ) === "true" && numberOfPages > 0 ) {
+        child.onclick = function () {
+          if(chunk !== numberOfPages){
+            chunk = numberOfPages;
+            onClickPaginationButtoniw4x6o( numberOfPages, pagination);
+          }
+        };
+      }
+
+      if ( child.getAttribute("pagination-previous") === "true" && numberOfPages > 0 ) {
+        child.onclick = function () {
+          if(chunk !== returnChunkIndexiw4x6o(chunk,numberOfPages,'-')){
+            chunk = returnChunkIndexiw4x6o(chunk,numberOfPages,'-');
+            onClickPaginationButtoniw4x6o(chunk, pagination);
+          }
+        };
+      }
+
+      if ( child.getAttribute("pagination-next") === "true" && numberOfPages > 0) {
+        child.onclick = function () {
+          if(chunk !== returnChunkIndexiw4x6o(chunk,numberOfPages,'+')){
+            chunk = returnChunkIndexiw4x6o(chunk,numberOfPages,'+');
+            onClickPaginationButtoniw4x6o(chunk, pagination);
+          }
+        };
+      }
+    };
     [...subDataElements].forEach((element,index) => {if(index >= data.length) subDataElements[index].style.display = 'none';})}});apiEquipmentApi.getAllequipment((error, data, response) => { if (error) {console.error(error);} else { console.log('API called successfully. Returned data: ' + data); const subDataElements =[...document.getElementById("itz4rs").querySelectorAll( "[dataitem='true']" )].filter(
     (element, index, array) =>
     !array.reduce((hasAncestorFlag, dataItem) => hasAncestorFlag || (element.compareDocumentPosition(dataItem) & Node.DOCUMENT_POSITION_CONTAINS) === 8, false)
